@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.darengj.jddata.dao.IJDDao">
+   <!-- <select id="queryAlbum" resultType="com.darengj.jddata.beans.Album" parameterType="java.util.Map">
+    SELECT id,data_id,title,sub_title,author,like_num,cover_pic,link,fetch_time FROM (
+    <foreach item="til" index="index" collection="#{title}">
+        SELECT id,data_id,title,sub_title,author,like_num,cover_pic,link,fetch_time FROM T_ALB_INV
+        <choose>
+            <when test="til != null">
+                where title like '%#{til}%'
+            </when>&lt;!&ndash;
+                <otherwise>
+                    where  0=1
+                </otherwise>&ndash;&gt;
+        </choose>
+        UNION
+    </foreach>
+    <foreach collection="#{sub_title}" index="index" item="sub" open="(" separator="," close=")">
+        SELECT id,data_id,title,sub_title,author,like_num,cover_pic,link,fetch_time FROM T_ALB_INV
+        <choose>
+            <when test="sub != null">
+                where sub_title like '%#{sub}%'
+            </when>&lt;!&ndash;
+                <otherwise>
+                    where  0=1
+                </otherwise>&ndash;&gt;
+        </choose>
+        UNION
+    </foreach>
+    SELECT id,data_id,title,sub_title,author,like_num,cover_pic,link,fetch_time FROM T_ALB_INV
+    WHERE 0=1 ) x LIMIT #{star_position},#{page_size}
+</select>
+
+-->
+
+    <select id="queryAlbum" resultType="com.darengj.jddata.beans.Album" parameterType="java.util.Map">
+        SELECT id,data_id,title,sub_title,author,like_num,cover_pic,link,fetch_time
+        FROM (SELECT id,data_id,title,sub_title,author,like_num,cover_pic,link,fetch_time FROM T_ALB_INV
+        WHERE 0=0 AND
+        <foreach collection="title" index="index" item="item" open="(" separator="AND" close=")">
+            title like '%${item}%'
+        </foreach>
+        AND
+        <foreach collection="sub_title" index="index" item="item" open="(" separator="AND" close=")">
+            sub_title like '%${item}%'
+        </foreach>
+        ) x LIMIT #{star_position},#{page_size}
+
+    </select>
+
+</mapper>

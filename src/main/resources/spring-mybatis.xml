@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/data/mongo
+       http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/cache
+       http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+
+    <!--配置数据源 begin-->
+    <bean  id="propertyConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>classpath:jdbc.properties</value>
+        </property>
+    </bean>
+    <bean id="dataSource"
+          class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="maxActive" value="${jdbc.maxActive}" />	<!--连接池的最大值  -->
+        <property name="maxIdle" value="${jdbc.maxIdle}" /><!-- 最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止  -->
+        <property name="minIdle" value="${jdbc.minIdle}" /><!-- 最小空闲值.当空闲的连接数少于阀值时 -->
+        <property name="maxWait" value="${jdbc.maxWait}" /><!-- 超时等待时间以毫秒为单位-->
+    </bean>
+    <!--配置数据源end-->
+
+    <!-- myBatis映射文件和dao配置 begin -->
+    <!--自动扫描mapping文件-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mapperLocations" value="classpath*:mapping.darengj.jddata/jddata.xml" /><!-- 加载对象xml配置文件-->
+    </bean>
+    <!--dao接口所在包名-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.darengj.*.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+    <!-- myBatis映射文件和dao配置 end -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!--
+        mongodb 配置 begin
+    -->
+    <!--<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg ref="mongoDbFactory"/>
+    </bean>
+    <bean id ="mongoDbFactory" class="org.springframework.data.mongodb.core.SimpleMongoDbFactory">
+        <constructor-arg ref="mongo"/>
+        <constructor-arg name="databaseName" value="foodie" type="java.lang.String"/>
+        <constructor-arg ref="userCert"/>
+    </bean>
+    <bean id = "userCert" class="org.springframework.data.authentication.UserCredentials">
+        <constructor-arg name="username" value="root" type="java.lang.String"/>
+        <constructor-arg name="password" value="810888" type="java.lang.String"/>
+    </bean>
+    <mongo:mongo id="mongo"   host="${mongodb.host}" port="${mongodb.port}">
+        <mongo:options connections-per-host="${connections-per-host}"
+                       threads-allowed-to-block-for-connection-multiplier="${threads-allowed-to-block-for-connection-multiplier}"
+                       max-wait-time="${max-wait-time}"
+                       connect-timeout="${connect-timeout}"
+                       socket-timeout="${socket-timeout}"
+                       socket-keep-alive="${socket-keep-alive}"
+                       auto-connect-retry="${auto-connect-retry}"
+                       slave-ok="${slave-ok}"
+        />
+    </mongo:mongo>-->
+    <!--
+        mongodb 配置 end
+    -->
+
+    <!--redis配置-->
+   <!-- <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"></property>
+    </bean>
+
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        &lt;!&ndash;<property name="password" value="${redis.password}"/>&ndash;&gt;
+    </bean>-->
+
+
+</beans>

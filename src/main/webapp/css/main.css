@@ -1,0 +1,55 @@
+body {
+    font-family:微软雅黑;
+    background: #ebebeb;}
+.header {
+    background: #222;
+    background-repeat: no-repeat;
+    background-position: center 0;
+    -webkit-background-size: cover;
+    background-size: cover;
+    padding: 200px 0 0;
+    text-align: center;
+    min-height: 400px;
+    position: relative;
+
+}
+.logoimg {
+    position: absolute;
+    left: 1%;
+    right: 1%;
+    bottom: -34px;
+}
+.logotxt {
+    margin-bottom: 30px;
+    border: 0;
+}
+.post {
+    padding: 35px;
+    background: #ffffff;
+    margin-bottom: 35px;
+    position: relative;
+    overflow: hidden;
+}
+.post .post-head {
+    text-align: center;
+}
+.post .post-head .post-title {
+    margin: 0;
+    font-size: 2.0em;
+    line-height: 1.2em;
+}
+.post .post-head .post-meta {
+    color: #959595;
+    margin: 14px 0 0px;
+}
+.post .featured-media {
+    margin-top: 30px;
+    overflow: hidden;
+}
+.featured-media img{ width: 100%; height: auto;max-width: 100%; display: block; }
+
+.pic-container{
+    overflow: hidden;
+    padding: 1px;
+    cursor: pointer;
+}
