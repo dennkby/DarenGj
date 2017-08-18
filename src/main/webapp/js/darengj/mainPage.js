@@ -43,6 +43,7 @@ var personal = {
             }
         })
     },
+    
     request_data:function(page_num,page_szie){
         var title = "";
         for(var i = 0;i<$(".title_con").length;i++){
