@@ -11,4 +11,5 @@ import java.util.Map;
  */
 public interface IJDDao {
     public List<Album> queryAlbum(JSONObject q_condition) throws Exception;
+    public int queryPageInfo(JSONObject q_condition) throws Exception;
 }

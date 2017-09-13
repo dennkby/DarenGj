@@ -14,8 +14,14 @@ public class Album {
     private int like_num;
     private String cover_pic;
     private String link;
-    private Date fetch_time;
-
+    private String fetch_time;
+    private String publish_time;
+    public String getPublish_time() {
+        return publish_time;
+    }
+    public void setPublish_time(String publish_time) {
+        this.publish_time = publish_time;
+    }
     public int getId() {
         return id;
     }
@@ -80,11 +86,11 @@ public class Album {
         this.link = link;
     }
 
-    public Date getFetch_time() {
+    public String getFetch_time() {
         return fetch_time;
     }
 
-    public void setFetch_time(Date fetch_time) {
+    public void setFetch_time(String fetch_time) {
         this.fetch_time = fetch_time;
     }
 }

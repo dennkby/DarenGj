@@ -1,0 +1,79 @@
+<link type="text/css" href="../css/bootstrap-theme.css" rel="stylesheet"/>
+<link type="text/css" href="../css/bootstrap.css" rel="stylesheet"/>
+<link type="text/css" href="../css/main.css" rel="stylesheet"/>
+<link type="text/css" href="../css/personal.css" rel="stylesheet"/>
+<div name="jd_centent">
+    <div class="col-xs-10 col-sm-10 col-md-10 ">
+        <div class="post">
+            <div class="row">
+                <div class="col-xs-4 col-md-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="title_txt" placeholder="添加标题查询词组">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" id="add_title">添加</button>
+                                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-md-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="sub_title_txt"
+                               placeholder="添加副标题查询词组">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" id="add_sub_title">添加</button>
+                                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-2 col-md-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="author_txt"
+                               placeholder="输入要查询的作者">
+                    </div>
+                </div>
+                <div class="col-xs-2 col-md-2">
+                    <button type="button" class="btn btn-primary" id="query_btn">查询</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-5 col-md-5" id="title_lables">
+                </div>
+                <div class="col-xs-5 col-md-5" id="sub_title_lables">
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default table-responsive">
+            <!-- Default panel contents -->
+            <div class="panel-heading">查询结果</div>
+
+            <!-- Table -->
+            <table class="table table-bordered" id="data_table">
+                <thead>
+                <tr>
+                    <th style="width:10%">标题</th>
+                    <th style="width:30%">导语</th>
+                    <th style="width:10%">作者</th>
+                    <th style="width:5%">点赞数</th>
+                    <th style="width:20%">封面</th>
+                    <th style="width:15%">原文链接</th>
+                    <th style="width:10%">发布时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 ">
+            <nav aria-label="Page navigation" style="float: right">
+                <ul class="pagination">
+                    <li>
+                        <span aria-hidden="true" id="previous" style="cursor: pointer">&laquo;上一页</span>
+                    </li>
+                    <li><span >第<span id="page_num" num="1">1</span>/<span id="total_page_num" num="1">100</span>页</span></li>
+                    <li>
+                        <span aria-hidden="true" id="next" style="cursor: pointer">下一页&raquo;</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

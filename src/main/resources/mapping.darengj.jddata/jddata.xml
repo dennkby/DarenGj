@@ -34,8 +34,8 @@
 -->
 
     <select id="queryAlbum" resultType="com.darengj.jddata.beans.Album" parameterType="java.util.Map">
-        SELECT id,data_id,title,sub_title,author,like_num,cover_pic,link,fetch_time
-        FROM (SELECT id,data_id,title,sub_title,author,like_num,cover_pic,link,fetch_time FROM T_ALB_INV
+        SELECT id,data_id,title,sub_title,author,like_num,cover_pic,link,fetch_time,publish_time
+        FROM (SELECT id,data_id,title,sub_title,author,like_num,cover_pic,link,fetch_time,publish_time FROM T_ALB_INV
         WHERE 0=0 AND
         <foreach collection="title" index="index" item="item" open="(" separator="AND" close=")">
             title like '%${item}%'
@@ -44,7 +44,24 @@
         <foreach collection="sub_title" index="index" item="item" open="(" separator="AND" close=")">
             sub_title like '%${item}%'
         </foreach>
+        AND author like CONCAT('%',#{author},'%')
         ) x LIMIT #{star_position},#{page_size}
+
+    </select>
+
+    <select id="queryPageInfo" resultType="int" parameterType="java.util.Map">
+        SELECT COUNT(*)/#{page_size} total_page
+        FROM (SELECT id,data_id,title,sub_title,author,like_num,cover_pic,link,fetch_time,publish_time FROM T_ALB_INV
+        WHERE 0=0 AND
+        <foreach collection="title" index="index" item="item" open="(" separator="AND" close=")">
+            title like '%${item}%'
+        </foreach>
+        AND
+        <foreach collection="sub_title" index="index" item="item" open="(" separator="AND" close=")">
+            sub_title like '%${item}%'
+        </foreach>
+        AND author like CONCAT('%',#{author},'%')
+        ) x
 
     </select>
 

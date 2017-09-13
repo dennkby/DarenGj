@@ -53,3 +53,34 @@ body {
     padding: 1px;
     cursor: pointer;
 }
+.leftMeun {
+    /*position: absolute;*/
+    box-sizing: border-box;
+    /*width: 200px;*/
+    height: 1000px;
+    background: #4d5e70 bottom;
+}
+.leftMeun >div {
+    padding-left: 60px;
+}
+
+.meun-item {
+    line-height: 40px;
+    height: 40px;
+    color: #aab1b7;
+    cursor: pointer;
+    font-size:17px
+}
+.meun-item-active {
+    background-color: #3d4e60;
+    border-right: 4px solid #647f9d;
+    color: #fff;
+    font-size:17px
+}
+.meun-title {
+    color: #828e9a;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}

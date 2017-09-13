@@ -11,4 +11,5 @@ import java.util.Map;
  */
 public interface IJDService {
     public List<Album> queryAlbum(JSONObject param) throws Exception;
+    public int queryPageInfo(JSONObject param) throws Exception;
 }

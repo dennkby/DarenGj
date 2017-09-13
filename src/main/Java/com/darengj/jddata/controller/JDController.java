@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 
@@ -36,16 +37,19 @@ public class JDController {
     @RequestMapping(value = "/getAlbum.do",method = RequestMethod.POST)
     public JSONObject getAlbum() throws Exception{
         JSONObject result = new JSONObject();
-        request.setCharacterEncoding("utf-8");
+        request.setCharacterEncoding("UTF-8");
         JSONObject param = new JSONObject();
-        param.put("title",request.getParameter("title"));
+        param.put("title", request.getParameter("title"));
         param.put("sub_title",request.getParameter("sub_title"));
+        param.put("author",request.getParameter("author"));
         param.put("page_size",request.getParameter("page_size"));
         param.put("page_num",request.getParameter("page_num"));
         try{
             List<Album> albumList = jdService.queryAlbum(param);
+            int totalPage = jdService.queryPageInfo(param);
             result.put("code",Constants.RETURN_SUCESS);
             result.put("albumList",albumList);
+            result.put("totalPage",totalPage);
         }catch (Exception e){
             e.printStackTrace();
             result.put("code",Constants.SERVER_ERROR);
